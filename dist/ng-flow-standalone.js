@@ -1605,7 +1605,7 @@ angular.module('flow.init', ['flow.provider'])
       args.shift();
       var event = $scope.$broadcast.apply($scope, ['flow::' + eventName, flow].concat(args));
       if ({
-        'progress':1, 'filesSubmitted':1, 'fileSuccess': 1, 'fileError': 1, 'complete': 1
+        'progress':1, 'filesSubmitted':1, 'fileUploadSuccess': 1, 'fileError': 1, 'complete': 1
       }[eventName]) {
         $scope.$apply();
       }
@@ -1728,8 +1728,10 @@ angular.module('flow.drop', ['flow.init'])
 !function (angular) {'use strict';
   var module = angular.module('flow.events', ['flow.init']);
   var events = {
-    fileSuccess: ['$file', '$message'],
+    fileSuccess: ['$file'],
+    fileUploadSuccess: ['$file', '$message'],
     fileProgress: ['$file'],
+    fileInitialized: ['$file'],
     fileAdded: ['$file', '$event'],
     filesAdded: ['$files', '$event'],
     filesSubmitted: ['$files', '$event'],
