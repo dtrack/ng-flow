@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/flowjs/ng-flow.git"
+    "url": "git://github.com/dtrack/ng-flow.git"
   },
   "keywords": [
     "flow.js",

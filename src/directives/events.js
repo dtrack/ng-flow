@@ -1,8 +1,10 @@
 !function (angular) {'use strict';
   var module = angular.module('flow.events', ['flow.init']);
   var events = {
-    fileSuccess: ['$file', '$message'],
+    fileSuccess: ['$file'],
+    fileUploadSuccess: ['$file', '$message'],
     fileProgress: ['$file'],
+    fileInitialized: ['$file'],
     fileAdded: ['$file', '$event'],
     filesAdded: ['$files', '$event'],
     filesSubmitted: ['$files', '$event'],

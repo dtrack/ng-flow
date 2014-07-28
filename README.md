@@ -17,22 +17,22 @@ it contains development and minified production files in `dist/` directory,
 they are also concatenated with core flow.js library.
 
 **Using Bower**
-        
+
         bower install ng-flow#~2
-                
+
 **Git Clone**
-        
+
         git clone https://github.com/flowjs/ng-flow
-        
+
 **Using Yeoman**
 
         bower install "ng-flow#~2" --save
         grunt bower-install
-                
+
 2) Add the module to your app as a dependency:
 
         angular.module('app', ['flow'])
-        
+
 How can I use it?
 ============
 
@@ -178,8 +178,10 @@ How can I catch events?
 Events are listed inside `flow-init` directive:
 ````html
 <div flow-init
-      flow-file-success=" ... properties '$file', '$message' can be accessed ... "
+      flow-file-success=" ... properties '$file' can be accessed ... "
+      flow-file-upload-success=" ... properties '$file', '$message' can be accessed ... "
       flow-file-progress=" ... property '$file' can be accessed ... "
+      flow-file-initialized=" ... property '$file' can be accessed ... "
       flow-file-added=" ... properties '$file', '$event' can be accessed ... "
       flow-files-added=" ... properties '$files', '$event' can be accessed ... "
       flow-files-submitted=" ... properties '$files', '$event' can be accessed ... "
