@@ -16,7 +16,7 @@
   "main": "./dist/ng-flow.js",
   "dependencies": {
     "angular": "~1",
-    "flow.js": "git@github.com:dtrack/flow.js.git"
+    "flow.js": "git@github.com:dtrack/flow.js.git#addInitializeAndFinalizeOptions"
   },
   "devDependencies": {
     "angular-mocks": "~1"
