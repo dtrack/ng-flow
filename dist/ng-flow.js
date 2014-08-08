@@ -247,6 +247,38 @@ angular.module('flow.drop', ['flow.init'])
 }(angular);
 angular.module('flow.img', ['flow.init'])
 .directive('flowImg', [function() {
+  var queue = [];
+  var busy = false;
+  var fileReader = new FileReader();
+  var resolvers = {};
+
+  var processNextThumbail = function () {
+    if (!busy) {
+      var next = queue.shift();
+      if (!next) {
+        return;
+      }
+      busy = true;
+      fileReader.readAsDataURL(next.file);
+      fileReader.onload = function (event) {
+        resolvers[next.uniqueIdentifier](event.target.result);
+        busy = false;
+        processNextThumbail();
+      };
+    }
+  };
+  var getThumbnailUrl = function (file, resolver) {
+    if (!file) {
+      resolver(null);
+      return;
+    }
+    queue.push(file);
+    resolvers[file.uniqueIdentifier] = resolver;
+    if (!busy) {
+      processNextThumbail();
+    }
+  };
+
   return {
     'scope': false,
     'require': '^flowInit',
@@ -256,13 +288,14 @@ angular.module('flow.img', ['flow.init'])
         if (!file) {
           return ;
         }
-        var fileReader = new FileReader();
-        fileReader.readAsDataURL(file.file);
-        fileReader.onload = function (event) {
+        getThumbnailUrl(file, function (url) {
+          if (!url) {
+            return;
+          }
           scope.$apply(function () {
-            attrs.$set('src', event.target.result);
+            attrs.$set('src', url);
           });
-        };
+        });
       });
     }
   };
